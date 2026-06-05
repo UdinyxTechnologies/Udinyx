@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us – Udinyx</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .page-content {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--surface-glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(255,255,255,0.8);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+    }
+    .page-content h2, .page-content h3 { color: var(--on-surface); margin: 32px 0 16px; }
+    .page-content p { color: var(--on-surface-variant); margin-bottom: 20px; font-size: 17px; }
+    .page-content ul { padding-left: 24px; margin-bottom: 20px; color: var(--on-surface-variant); }
+    .page-content li { margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <!-- ====== NAVBAR ====== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Udinyx</a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link">Internship</a>
+        <a href="verify.html" class="nav-link">Verify</a>
+        <a href="about.html" class="nav-link active">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-header">
+      <span class="nav-logo">Udinyx</span>
+      <button class="mobile-menu-btn" id="mobileCloseBtn" aria-label="Close menu">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <a href="index.html" class="drawer-link">Internship</a>
+    <a href="verify.html" class="drawer-link">Verify</a>
+    <a href="about.html" class="drawer-link active">About</a>
+    <a href="contact.html" class="drawer-link">Contact</a>
+  </div>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+
+  <main style="padding-top: 120px; padding-bottom: 80px;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">About Us</span>
+        <h1 class="section-title">The Open Internship Movement</h1>
+      </div>
+      <div class="page-content">
+        <p>Every single day on LinkedIn, thousands of Computer Science students drop their emails in the comments of fake internship posts. They are met with professional-looking offer letters, generic copy-pasted projects, and an eventual demand to pay anywhere from ₹199 to ₹999 for a "documentation fee" or a PDF certificate.</p>
+        
+        <p>We call it what it is: <strong>an organized scam business exploiting desperation.</strong></p>
+        
+        <p>We exist to make internship scams completely irrelevant by giving every capable CS student access to genuine, guided work experience completely free. We don't believe in hoarding knowledge, and we don't believe in charging students to learn.</p>
+        
+        <p>For Batch 1, our interns aren't building throwaway calculator apps. They are building the infrastructure of this very platform—from the landing page to our automated verification engines. We are a lean, student-led collective proving that high-quality tech experience requires zero financial exploitation.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">Udinyx</span>
+        <p class="footer-tagline">Empowering the next generation of developers through verified, real-world experience.</p>
+      </div>
+      <div class="footer-links-col">
+        <h5 class="footer-col-title">Platform</h5>
+        <a href="index.html" class="footer-link">Internships</a>
+        <a href="verify.html" class="footer-link">Verify Certificate</a>
+      </div>
+      <div class="footer-links-col">
+        <h5 class="footer-col-title">Company</h5>
+        <a href="about.html" class="footer-link">About Us</a>
+        <a href="anti-scam.html" class="footer-link">Anti-Scam Policy</a>
+        <a href="open-proof.html" class="footer-link">Open Proof System</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      <div class="footer-links-col">
+        <h5 class="footer-col-title">Resources</h5>
+        <a href="https://github.com" class="footer-link">GitHub</a>
+        <a href="faq.html" class="footer-link">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Udinyx. All rights reserved. Empowering the next generation.</span>
+    </div>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>

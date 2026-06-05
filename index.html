@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Udinyx – Professional Real-World Internship Experience</title>
+  <meta name="description" content="Udinyx bridges the gap between education and industry. Accelerate your career through high-impact, verified internships with real-world projects and elite mentorship." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ====== NAVBAR ====== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Udinyx</a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link">Internship</a>
+        <a href="verify.html" class="nav-link">Verify</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-header">
+      <span class="nav-logo">Udinyx</span>
+      <button class="mobile-menu-btn" id="mobileCloseBtn" aria-label="Close menu">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <a href="index.html" class="drawer-link" onclick="document.getElementById('mobileCloseBtn').click()">Internship</a>
+    <a href="verify.html" class="drawer-link" onclick="document.getElementById('mobileCloseBtn').click()">Verify</a>
+    <a href="about.html" class="drawer-link" onclick="document.getElementById('mobileCloseBtn').click()">About</a>
+    <a href="contact.html" class="drawer-link" onclick="document.getElementById('mobileCloseBtn').click()">Contact</a>
+  </div>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+
+  <main>
+
+    <!-- ====== HERO SECTION ====== -->
+    <section class="hero-section" id="home">
+      <!-- Background orb -->
+      <div class="hero-orb"></div>
+      <div class="hero-orb hero-orb-2"></div>
+
+      <div class="container hero-content">
+
+        <h1 class="hero-headline">
+          Learn by Building <br class="desktop-only" />
+          <span class="headline-accent">Real Projects</span>
+        </h1>
+
+        <p class="hero-subtext">
+          Grow from learner to professional. Get guided by experienced mentors, build a strong GitHub portfolio, and earn verified certifications that showcase your skills to employers.
+        </p>
+
+        <div class="hero-cta-group" id="apply">
+          <a href="https://forms.gle/oygbTrC6hXCsfN657" class="btn btn-primary btn-lg" id="applyInternBtn">
+            <span class="material-symbols-outlined">school</span>
+            Apply as Intern
+          </a>
+          <a href="https://forms.gle/LfVs7crWo45tyBU28" class="btn btn-outline btn-lg" id="joinMentorBtn">
+            <span class="material-symbols-outlined">supervisor_account</span>
+            Join as Mentor
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Free to Apply</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Real Projects</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Verified Certs</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating glass card decorations -->
+      <div class="hero-float-card card-a">
+        <span class="material-symbols-outlined text-crimson">check_circle</span>
+        <div>
+          <div class="float-card-title">Verified Intern</div>
+          <div class="float-card-sub">UDX-9982-A7F</div>
+        </div>
+      </div>
+      <div class="hero-float-card card-b">
+        <span class="material-symbols-outlined text-crimson">rocket_launch</span>
+        <div>
+          <div class="float-card-title">Project Deployed</div>
+          <div class="float-card-sub">Live on Production</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== FOR STUDENTS SECTION ====== -->
+    <section class="section" id="students">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Student Features</span>
+          <h2 class="section-title">Everything You Need to Succeed</h2>
+          <p class="section-subtitle">We provide a structured path from learning to landing your dream job.</p>
+        </div>
+
+        <div class="features-grid">
+          <!-- Feature 1 -->
+          <div class="feature-card" style="--delay: 0ms">
+            <div class="feature-card-bg"></div>
+            <div class="feature-icon-wrap">
+              <span class="material-symbols-outlined feature-icon">money_off</span>
+            </div>
+            <h3 class="feature-card-title">Completely Free</h3>
+            <p class="feature-card-text">No hidden charges from start to end. But many opportunities for you.</p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="feature-card feature-card--elevated" style="--delay: 100ms">
+            <div class="feature-card-bg"></div>
+            <div class="feature-icon-wrap">
+              <span class="material-symbols-outlined feature-icon">work</span>
+            </div>
+            <h3 class="feature-card-title">Real Projects</h3>
+            <p class="feature-card-text">Work in team-based environments with industry-style workflows. Build your GitHub portfolio with active contributions.</p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="feature-card" style="--delay: 200ms">
+            <div class="feature-card-bg"></div>
+            <div class="feature-icon-wrap">
+              <span class="material-symbols-outlined feature-icon">supervisor_account</span>
+            </div>
+            <h3 class="feature-card-title">Mentor Guidance</h3>
+            <p class="feature-card-text">Weekly sessions, code reviews, career guidance, and technical doubt support from experienced professionals.</p>
+          </div>
+
+
+
+          <!-- Feature 5 -->
+          <div class="feature-card feature-card--elevated" style="--delay: 100ms">
+            <div class="feature-card-bg"></div>
+            <div class="feature-icon-wrap">
+              <span class="material-symbols-outlined feature-icon">workspace_premium</span>
+            </div>
+            <h3 class="feature-card-title">Verifiable Certification</h3>
+            <p class="feature-card-text">Earn project-backed credentials with unique IDs verifiable instantly on our public portal.</p>
+          </div>
+
+          <!-- Feature 6 -->
+          <div class="feature-card" style="--delay: 200ms">
+            <div class="feature-card-bg"></div>
+            <div class="feature-icon-wrap">
+              <span class="material-symbols-outlined feature-icon">rocket_launch</span>
+            </div>
+            <h3 class="feature-card-title">Career Opportunities</h3>
+            <p class="feature-card-text">Get internship recommendations, startup placements, freelancing gigs, and access to our alumni job board.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== FOR MENTORS SECTION ====== -->
+    <section class="section section-alt" id="mentors">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">For Mentors</span>
+          <h2 class="section-title">Shape the Next Generation</h2>
+          <p class="section-subtitle">Give back to the community while building your own leadership profile.</p>
+        </div>
+
+        <div class="difference-layout">
+          <div class="difference-cards">
+            <!-- The Pitch -->
+            <div class="diff-card">
+              <div class="diff-icon-wrap">
+                <span class="material-symbols-outlined diff-icon">campaign</span>
+              </div>
+              <div class="diff-content">
+                <h4 class="diff-title">The Opportunity</h4>
+                <p class="diff-text">Guide a small cohort of 10 ambitious CS students for 4–6 weeks as they build live open-source products. Gain powerful leadership experience for your resume, get recognized publicly on our official platform, and position yourself for paid senior mentor roles as we scale.</p>
+              </div>
+            </div>
+
+            <!-- The Role -->
+            <div class="diff-card">
+              <div class="diff-icon-wrap">
+                <span class="material-symbols-outlined diff-icon">rule_folder</span>
+              </div>
+              <div class="diff-content">
+                <h4 class="diff-title">Your Role</h4>
+                <p class="diff-text">Conduct weekly check-ins, assign tasks, provide feedback through our review system, and evaluate final code submissions.</p>
+              </div>
+            </div>
+
+             <!-- Recognition -->
+             <div class="diff-card">
+              <div class="diff-icon-wrap">
+                <span class="material-symbols-outlined diff-icon">military_tech</span>
+              </div>
+              <div class="diff-content">
+                <h4 class="diff-title">Professional Recognition</h4>
+                <p class="diff-text">Public mentor showcase, dedicated profile page, recommendation management, and an official leadership experience record.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="difference-visual">
+            <div class="diff-visual-card">
+              <div class="diff-visual-header">
+                <span class="material-symbols-outlined text-crimson">dashboard</span>
+                <span class="diff-visual-title">Mentor Dashboard</span>
+              </div>
+              <div class="trust-meter">
+                <div style="font-size: 13px; margin-bottom: 8px; color: var(--on-surface-variant);">Cohort Progress</div>
+                <div class="trust-meter-bar">
+                  <div class="trust-meter-fill" style="width: 75%"></div>
+                </div>
+                <span class="trust-meter-value">Week 3 / 4</span>
+              </div>
+              <div class="diff-stats-row">
+                <div class="diff-mini-stat">
+                  <span class="diff-mini-number">10</span>
+                  <span class="diff-mini-label">Students</span>
+                </div>
+                <div class="diff-mini-stat">
+                  <span class="diff-mini-number">12</span>
+                  <span class="diff-mini-label">PRs Reviewed</span>
+                </div>
+                <div class="diff-mini-stat">
+                  <span class="diff-mini-number">High</span>
+                  <span class="diff-mini-label">Engagement</span>
+                </div>
+              </div>
+              
+              <div style="margin-top: 24px;">
+                 <a href="https://forms.gle/LfVs7crWo45tyBU28" class="btn btn-primary" style="width: 100%; justify-content: center;">Apply to Mentor</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== HOW IT WORKS ====== -->
+    <section class="section" id="how">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Simple Process</span>
+          <h2 class="section-title">How It Works</h2>
+          <p class="section-subtitle">From application to verified certificate in four straightforward steps.</p>
+        </div>
+
+        <div class="steps-row">
+          <div class="step-item">
+            <div class="step-number">01</div>
+            <div class="step-icon-wrap">
+              <span class="material-symbols-outlined step-icon">edit_note</span>
+            </div>
+            <h4 class="step-title">Apply & Onboard</h4>
+            <p class="step-text">Fill out our free form. Complete an assessment/interview to get matched to the right track.</p>
+          </div>
+          <div class="step-connector"></div>
+
+          <div class="step-item">
+            <div class="step-number">02</div>
+            <div class="step-icon-wrap">
+              <span class="material-symbols-outlined step-icon">groups</span>
+            </div>
+            <h4 class="step-title">Meet Your Cohort</h4>
+            <p class="step-text">Join a team of peers and meet your dedicated mentor who will guide your progress.</p>
+          </div>
+          <div class="step-connector"></div>
+
+          <div class="step-item">
+            <div class="step-number">03</div>
+            <div class="step-icon-wrap">
+              <span class="material-symbols-outlined step-icon">terminal</span>
+            </div>
+            <h4 class="step-title">Build & Ship</h4>
+            <p class="step-text">Code, review, iterate. Track milestones on your dashboard and build your GitHub portfolio.</p>
+          </div>
+          <div class="step-connector"></div>
+
+          <div class="step-item">
+            <div class="step-number">04</div>
+            <div class="step-icon-wrap">
+              <span class="material-symbols-outlined step-icon">workspace_premium</span>
+            </div>
+            <h4 class="step-title">Get Certified</h4>
+            <p class="step-text">Receive a verifiable certificate linked to your commits and get access to career opportunities.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== VERIFY CTA SECTION ====== -->
+    <section class="section verify-cta-section" id="verify">
+      <div class="container">
+        <div class="verify-cta-card">
+          <div class="verify-cta-orb"></div>
+          <div class="verify-cta-orb verify-cta-orb-2"></div>
+          <div class="verify-cta-content">
+            <span class="material-symbols-outlined verify-cta-icon">verified_user</span>
+            <h2 class="verify-cta-title">Verify Credentials Instantly</h2>
+            <p class="verify-cta-text">Employers and partners can securely verify intern certificates, project deployment status, and skill endorsements through our dedicated portal.</p>
+            <a href="verify.html" class="btn btn-primary btn-lg verify-cta-btn">
+              Go to Verification Page
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">Udinyx</span>
+        <p class="footer-tagline">Empowering the next generation of developers through verified, real-world experience.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-link" aria-label="GitHub">
+            <span class="material-symbols-outlined">code</span>
+          </a>
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <span class="material-symbols-outlined">work</span>
+          </a>
+          <a href="#" class="social-link" aria-label="Open Proof">
+            <span class="material-symbols-outlined">verified</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-links-col">
+        <h5 class="footer-col-title">Platform</h5>
+        <a href="index.html" class="footer-link">Internships</a>
+        <a href="verify.html" class="footer-link">Verify Certificate</a>
+      </div>
+
+      <div class="footer-links-col">
+        <h5 class="footer-col-title">Company</h5>
+        <a href="about.html" class="footer-link">About Us</a>
+        <a href="anti-scam.html" class="footer-link">Anti-Scam Policy</a>
+        <a href="open-proof.html" class="footer-link">Open Proof System</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+
+      <div class="footer-links-col">
+        <h5 class="footer-col-title">Resources</h5>
+        <a href="https://github.com" class="footer-link">GitHub</a>
+        <a href="faq.html" class="footer-link">FAQ</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2024 Udinyx. All rights reserved. Empowering the next generation.</span>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <span>·</span>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

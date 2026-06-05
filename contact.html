@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us – Udinyx</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    @media (min-width: 800px) {
+      .contact-layout { grid-template-columns: 1fr 1.5fr; }
+    }
+    
+    .contact-info {
+      background: var(--surface-glass);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(255,255,255,0.8);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+      height: fit-content;
+    }
+    .contact-info h3 { color: var(--on-surface); margin-bottom: 16px; }
+    .contact-info p { color: var(--on-surface-variant); margin-bottom: 32px; font-size: 16px; }
+    
+    .email-block {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: rgba(255,255,255,0.6);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--radius);
+    }
+    .email-block .material-symbols-outlined { color: var(--crimson); font-size: 28px; }
+    .email-block div { display: flex; flex-direction: column; }
+    .email-block span:first-child { font-size: 12px; font-weight: 600; color: var(--on-surface-variant); text-transform: uppercase; letter-spacing: 0.05em; }
+    .email-block a { font-size: 16px; font-weight: 600; color: var(--on-surface); text-decoration: none; }
+    .email-block a:hover { color: var(--crimson); }
+
+    .contact-form-card {
+      background: white;
+      border: 1.5px solid var(--outline-variant);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      box-shadow: 0 12px 48px rgba(220,20,60,0.05);
+    }
+    
+    .form-group { margin-bottom: 24px; }
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--on-surface);
+      margin-bottom: 8px;
+    }
+    .form-control {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-family: var(--font);
+      font-size: 16px;
+      color: var(--on-surface);
+      transition: all var(--transition);
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--crimson);
+      box-shadow: 0 0 0 4px var(--crimson-10);
+    }
+    textarea.form-control { resize: vertical; min-height: 120px; }
+  </style>
+</head>
+<body>
+  <!-- ====== NAVBAR ====== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Udinyx</a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link">Internship</a>
+        <a href="verify.html" class="nav-link">Verify</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+      </div>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-header">
+      <span class="nav-logo">Udinyx</span>
+      <button class="mobile-menu-btn" id="mobileCloseBtn" aria-label="Close menu">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <a href="index.html" class="drawer-link">Internship</a>
+    <a href="verify.html" class="drawer-link">Verify</a>
+    <a href="about.html" class="drawer-link">About</a>
+    <a href="contact.html" class="drawer-link active">Contact</a>
+  </div>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+
+  <main style="padding-top: 120px; padding-bottom: 80px;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Contact Us</span>
+        <h1 class="section-title">Get in Touch</h1>
+        <p class="section-subtitle">Have a question about our internships, verification system, or anti-scam policy? We're here to help.</p>
+      </div>
+      
+      <div class="contact-layout">
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <h3>Reach Out Directly</h3>
+          <p>We believe in radical transparency. If you have any queries, drop us an email and our student-led collective will get back to you promptly.</p>
+          
+          <div class="email-block">
+            <span class="material-symbols-outlined">mail</span>
+            <div>
+              <span>Email Us</span>
+              <a href="mailto:hello@udinyx.com">hello@udinyx.com</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-card">
+          <form action="https://formspree.io/f/xbdedroe" method="POST">
+            <div class="form-group">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" id="name" name="name" class="form-control" placeholder="John Doe" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" id="email" name="email" class="form-control" placeholder="john@example.com" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="query" class="form-label">Your Query</label>
+              <textarea id="query" name="query" class="form-control" placeholder="How can we help you?" required></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 14px;">
+              Send Message
+              <span class="material-symbols-outlined" style="font-size: 18px;">send</span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">Udinyx</span>
+        <p class="footer-tagline">Empowering the next generation of developers through verified, real-world experience.</p>
+      </div>
+      <div class="footer-links-col">
+        <h5 class="footer-col-title">Platform</h5>
+        <a href="index.html" class="footer-link">Internships</a>
+        <a href="verify.html" class="footer-link">Verify Certificate</a>
+      </div>
+      <div class="footer-links-col">
+        <h5 class="footer-col-title">Company</h5>
+        <a href="about.html" class="footer-link">About Us</a>
+        <a href="anti-scam.html" class="footer-link">Anti-Scam Policy</a>
+        <a href="open-proof.html" class="footer-link">Open Proof System</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      <div class="footer-links-col">
+        <h5 class="footer-col-title">Resources</h5>
+        <a href="https://github.com" class="footer-link">GitHub</a>
+        <a href="faq.html" class="footer-link">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Udinyx. All rights reserved. Empowering the next generation.</span>
+    </div>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>
