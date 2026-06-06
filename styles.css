@@ -1398,31 +1398,36 @@ body.drawer-open .navbar {
 
 /* Performance bars */
 .result-perf {
-  background: var(--surface-container-low);
+  background: rgba(255,255,255,0.96);
+  border: 1px solid rgba(220,20,60,0.14);
   border-radius: var(--radius-lg);
-  padding: 20px;
+  padding: 22px;
   margin-bottom: 24px;
   display: flex;
   flex-direction: column;
   gap: 14px;
   position: relative;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.45);
 }
 .perf-row { display: flex; align-items: center; gap: 12px; }
-.perf-label { font-size: 13px; font-weight: 600; color: var(--on-surface-variant); width: 110px; flex-shrink: 0; }
+.perf-label { font-size: 13px; font-weight: 600; color: #5f4449; width: 120px; flex-shrink: 0; }
 .perf-bar-wrap { flex: 1; }
 .perf-bar {
-  height: 8px;
-  background: var(--surface-container-high);
+  height: 10px;
+  background: rgba(39,39,42,0.08);
   border-radius: var(--radius-full);
   overflow: hidden;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.05);
 }
 .perf-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--crimson), var(--crimson-light));
+  background: linear-gradient(90deg, rgba(220,20,60,0.95), rgba(255,77,109,0.85));
   border-radius: var(--radius-full);
   transition: width 1s var(--ease);
+  box-shadow: 0 0 18px rgba(220,20,60,0.2);
+  min-width: 4px;
 }
-.perf-val { font-size: 13px; font-weight: 700; color: var(--crimson); width: 36px; text-align: right; }
+.perf-val { font-size: 13px; font-weight: 700; color: #b91c1c; width: 44px; text-align: right; }
 
 .result-card-footer {
   display: flex;
@@ -1516,6 +1521,38 @@ body.drawer-open .navbar {
   .hero-cta-group .btn { width: 100%; justify-content: center; }
   .result-name-block { flex-direction: column; align-items: flex-start; }
   .result-card-header { flex-direction: column; align-items: flex-start; }
+}
+
+@media print {
+  body { background: #fff !important; color: #000 !important; }
+  body * { visibility: hidden !important; }
+  #resultWrap, #resultWrap * { visibility: visible !important; }
+  #resultWrap { position: relative; width: 100%; top: 0; left: 0; }
+  nav, .navbar, .mobile-drawer, .drawer-overlay, .verify-header, .verify-search-wrap, .verify-info-row, footer, .verify-orb, .result-card-footer, .search-hint, .cors-notice, .mobile-menu-btn, .drawer-link { display: none !important; }
+  .result-card {
+    box-shadow: none !important;
+    background: #fff !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+  .result-card-header,
+  .result-info-grid,
+  .result-skills,
+  .result-perf,
+  .projects-section {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+  }
+  .result-card-header,
+  .result-info-panel,
+  .perf-row,
+  .project-card,
+  .project-cards-wrap {
+    page-break-inside: avoid;
+  }
+  .result-card, .project-card { break-inside: avoid-column; }
 }
 
 /* ============================================================
