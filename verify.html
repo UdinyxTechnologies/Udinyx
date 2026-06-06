@@ -10,6 +10,138 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* ── Project Cards ── */
+    .projects-section { margin-top: 24px; }
+    .projects-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--text-muted, #888);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .project-cards-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .project-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.2s;
+    }
+    .project-card:hover { border-color: rgba(220,38,38,0.35); }
+    .project-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .project-card-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #f0f0f0;
+    }
+    .project-card-desc {
+      font-size: 12px;
+      color: #888;
+      line-height: 1.5;
+    }
+    .project-tech-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .tech-chip {
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 20px;
+      background: rgba(220,38,38,0.1);
+      color: #f87171;
+      border: 1px solid rgba(220,38,38,0.2);
+      font-weight: 500;
+    }
+    .project-links {
+      display: flex;
+      gap: 10px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: #a78bfa;
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(167,139,250,0.2);
+      background: rgba(167,139,250,0.05);
+      transition: all 0.2s;
+    }
+    .project-link:hover {
+      background: rgba(167,139,250,0.12);
+      border-color: rgba(167,139,250,0.4);
+    }
+    .project-link .material-symbols-outlined { font-size: 14px; }
+    .project-status-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .status-completed {
+      background: rgba(22,163,74,0.15);
+      color: #4ade80;
+      border: 1px solid rgba(22,163,74,0.3);
+    }
+    .status-ongoing {
+      background: rgba(234,179,8,0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(234,179,8,0.3);
+    }
+
+    /* ── Loading skeleton ── */
+    .skeleton {
+      background: linear-gradient(90deg,#1e1e1e 25%,#2a2a2a 50%,#1e1e1e 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 6px;
+    }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    /* ── CORS notice ── */
+    .cors-notice {
+      font-size: 12px;
+      color: #fbbf24;
+      background: rgba(234,179,8,0.08);
+      border: 1px solid rgba(234,179,8,0.2);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-top: 12px;
+      display: none;
+    }
+
+    /* ── Result hidden by default ── */
+    .result-wrap { display: none; }
+    .result-wrap.visible { display: block; }
+    .hidden { display: none !important; }
+
+    /* ── Spin animation ── */
+    @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    .spin { animation: spin 0.8s linear infinite; display: inline-block; }
+  </style>
 </head>
 <body>
 
@@ -45,7 +177,6 @@
   <div class="drawer-overlay" id="drawerOverlay"></div>
 
   <main class="verify-main">
-    <!-- Background orbs -->
     <div class="verify-orb"></div>
     <div class="verify-orb verify-orb-2"></div>
 
@@ -67,8 +198,7 @@
           type="text"
           id="certInput"
           class="verify-input"
-          placeholder="Enter Certificate ID (e.g., UDX-9982-A7F)"
-          value="UDX-9982-A7F"
+          placeholder="Enter Certificate ID (e.g., UDX-001-A7F)"
           autocomplete="off"
         />
         <button class="btn btn-primary verify-btn" id="verifyBtn">
@@ -76,14 +206,22 @@
           <span class="material-symbols-outlined" id="verifyBtnIcon">arrow_forward</span>
         </button>
       </div>
-      <div class="search-hint">Try: <button class="sample-id-btn" onclick="useSampleId('UDX-9982-A7F')">UDX-9982-A7F</button> · <button class="sample-id-btn" onclick="useSampleId('UDX-4471-B2C')">UDX-4471-B2C</button> · <button class="sample-id-btn" onclick="useSampleId('UDX-INVALID')">UDX-INVALID</button></p>
+      <div class="search-hint">
+        Try sample IDs:
+        <button class="sample-id-btn" onclick="useSampleId('UDX-9982-A7F')">UDX-9982-A7F</button> ·
+        <button class="sample-id-btn" onclick="useSampleId('UDX-4471-B2C')">UDX-4471-B2C</button> ·
+        <button class="sample-id-btn" onclick="useSampleId('UDX-INVALID')">UDX-INVALID</button>
+      </div>
+      <div class="cors-notice" id="corsNotice">
+        ⚠️ Could not connect to live database. Showing demo data. If you are the admin, check your Google Sheet URL configuration.
       </div>
     </div>
 
     <!-- Result Card -->
     <div class="result-wrap" id="resultWrap">
+
       <!-- SUCCESS CARD -->
-      <div class="result-card" id="resultCard">
+      <div class="result-card hidden" id="resultCard">
         <div class="result-bg-decoration"></div>
 
         <!-- Card Header -->
@@ -93,8 +231,8 @@
               <span class="material-symbols-outlined" style="font-size:32px;color:var(--crimson)">person</span>
             </div>
             <div>
-              <h2 class="result-name" id="resultName">Alex Mercer</h2>
-              <p class="result-cert-id">Credential ID: <strong id="resultCertId">UDX-9982-A7F</strong></p>
+              <h2 class="result-name" id="resultName"></h2>
+              <p class="result-cert-id">Credential ID: <strong id="resultCertId"></strong></p>
             </div>
           </div>
           <div class="verified-badge" id="verifiedBadge">
@@ -106,67 +244,75 @@
         <!-- Info Grid -->
         <div class="result-info-grid">
           <div class="result-info-panel">
-            <span class="result-info-label">Project Focus</span>
-            <span class="result-info-value" id="resultProject">Full-Stack Distributed Systems</span>
+            <span class="result-info-label">Track</span>
+            <span class="result-info-value" id="resultTrack"></span>
           </div>
           <div class="result-info-panel">
             <span class="result-info-label">Completion Date</span>
-            <span class="result-info-value" id="resultDate">November 12, 2023</span>
+            <span class="result-info-value" id="resultDate"></span>
           </div>
           <div class="result-info-panel">
             <span class="result-info-label">Mentor</span>
-            <span class="result-info-value" id="resultMentor">Priya Sharma · Google</span>
+            <span class="result-info-value" id="resultMentor"></span>
           </div>
           <div class="result-info-panel">
-            <span class="result-info-label">Internship Duration</span>
-            <span class="result-info-value" id="resultDuration">8 Weeks · Full Remote</span>
+            <span class="result-info-label">Duration</span>
+            <span class="result-info-value" id="resultDuration"></span>
+          </div>
+          <div class="result-info-panel">
+            <span class="result-info-label">Batch</span>
+            <span class="result-info-value" id="resultBatch"></span>
+          </div>
+          <div class="result-info-panel">
+            <span class="result-info-label">College</span>
+            <span class="result-info-value" id="resultCollege"></span>
           </div>
         </div>
 
         <!-- Skills Row -->
         <div class="result-skills">
           <span class="result-info-label" style="display:block;margin-bottom:10px">Verified Skills</span>
-          <div class="result-skill-chips" id="resultSkills">
-            <span class="skill-chip skill-chip--verified">React.js</span>
-            <span class="skill-chip skill-chip--verified">Node.js</span>
-            <span class="skill-chip skill-chip--verified">PostgreSQL</span>
-            <span class="skill-chip skill-chip--verified">Docker</span>
-            <span class="skill-chip skill-chip--verified">System Design</span>
-          </div>
+          <div class="result-skill-chips" id="resultSkills"></div>
         </div>
 
-        <!-- Performance Bar -->
+        <!-- Performance Bars -->
         <div class="result-perf">
           <div class="perf-row">
             <span class="perf-label">Code Quality</span>
             <div class="perf-bar-wrap">
-              <div class="perf-bar"><div class="perf-fill" style="width:88%"></div></div>
+              <div class="perf-bar"><div class="perf-fill" id="perfQuality" style="width:0%"></div></div>
             </div>
-            <span class="perf-val">88%</span>
+            <span class="perf-val" id="perfQualityVal">0%</span>
           </div>
           <div class="perf-row">
             <span class="perf-label">Timeliness</span>
             <div class="perf-bar-wrap">
-              <div class="perf-bar"><div class="perf-fill" style="width:95%"></div></div>
+              <div class="perf-bar"><div class="perf-fill" id="perfTime" style="width:0%"></div></div>
             </div>
-            <span class="perf-val">95%</span>
+            <span class="perf-val" id="perfTimeVal">0%</span>
           </div>
           <div class="perf-row">
             <span class="perf-label">Communication</span>
             <div class="perf-bar-wrap">
-              <div class="perf-bar"><div class="perf-fill" style="width:90%"></div></div>
+              <div class="perf-bar"><div class="perf-fill" id="perfComms" style="width:0%"></div></div>
             </div>
-            <span class="perf-val">90%</span>
+            <span class="perf-val" id="perfCommsVal">0%</span>
           </div>
         </div>
 
-        <!-- Card Footer Actions -->
+        <!-- Projects Section (dynamic — supports multiple) -->
+        <div class="projects-section" id="projectsSection">
+          <span class="projects-label">Projects Completed</span>
+          <div class="project-cards-wrap" id="projectCards"></div>
+        </div>
+
+        <!-- Card Footer -->
         <div class="result-card-footer">
-          <button class="btn btn-ghost result-action-btn" id="githubBtn">
-            <span class="material-symbols-outlined">code</span>
-            GitHub Project Commits
+          <button class="btn btn-ghost result-action-btn" id="linkedinBtn" onclick="">
+            <span class="material-symbols-outlined">person</span>
+            LinkedIn Profile
           </button>
-          <button class="btn btn-primary result-action-btn" id="downloadBtn">
+          <button class="btn btn-primary result-action-btn" onclick="window.print()">
             <span class="material-symbols-outlined">download</span>
             Download PDF
           </button>
@@ -178,11 +324,15 @@
         <div class="error-content">
           <span class="material-symbols-outlined error-icon">error</span>
           <h3 class="error-title">Certificate Not Found</h3>
-          <p class="error-text">No certificate matching <strong id="errorId">UDX-INVALID</strong> was found in our records. Please check the ID and try again.</p>
+          <p class="error-text">
+            No certificate matching <strong id="errorId"></strong> was found in our records.
+            Please check the ID and try again.
+          </p>
           <button class="btn btn-outline" onclick="resetForm()">Try Another ID</button>
         </div>
       </div>
-    </div>
+
+    </div><!-- /result-wrap -->
 
     <!-- Info Cards Below -->
     <div class="verify-info-row">
@@ -193,7 +343,7 @@
       </div>
       <div class="verify-info-card">
         <span class="material-symbols-outlined" style="color:var(--crimson);font-size:28px">lock</span>
-        <h4>Cryptographically Signed</h4>
+        <h4>Tamper-Proof Records</h4>
         <p>Our Open Proof System ensures certificates cannot be forged, altered, or duplicated.</p>
       </div>
       <div class="verify-info-card">
@@ -235,125 +385,337 @@
   </footer>
 
   <script>
-    // ======= Fake certificate data =======
-    const CERTS = {
+    // ══════════════════════════════════════════════════════════
+    // CONFIGURATION — REPLACE THESE WITH YOUR ACTUAL SHEET IDs
+    // ══════════════════════════════════════════════════════════
+
+    // Step 1: Publish your Google Sheet as CSV (File > Share > Publish to web > CSV)
+    // Step 2: Get your Sheet ID from the URL
+    // Step 3: Replace YOUR_SHEET_ID below
+
+    // Sheet 1: certificates tab (gid=0 is first sheet, change if needed)
+   const CERT_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSeIAdwbEERHV8M_DpdHbj-EJZWtSR318t0LK1deXF6C_CK6k8Y7neAI7AHkkexCRc2hlPVHSttJCNu/pub?gid=1777263371&single=true&output=csv';
+   const PROJ_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSeIAdwbEERHV8M_DpdHbj-EJZWtSR318t0LK1deXF6C_CK6k8Y7neAI7AHkkexCRc2hlPVHSttJCNu/pub?gid=1305443429&single=true&output=csv';
+
+
+    // ══════════════════════════════════════════════════════════
+    // FALLBACK DEMO DATA — shown if sheet fetch fails
+    // Remove or update once your sheet is configured
+    // ══════════════════════════════════════════════════════════
+    const DEMO_CERTS = {
       'UDX-9982-A7F': {
+        cert_id: 'UDX-9982-A7F',
         name: 'Alex Mercer',
-        project: 'Full-Stack Distributed Systems',
-        date: 'November 12, 2023',
-        mentor: 'Priya Sharma · Google',
+        track: 'Full Stack Development',
+        mentor_name: 'Priya Sharma · Udinyx',
         duration: '8 Weeks · Full Remote',
-        skills: ['React.js', 'Node.js', 'PostgreSQL', 'Docker', 'System Design'],
-        perf: { quality: 88, time: 95, comms: 90 }
+        completion_date: 'November 12, 2023',
+        batch: 'Batch-1',
+        college: 'IIT Delhi',
+        skills: 'React.js,Node.js,PostgreSQL,Docker,System Design',
+        code_quality: '88',
+        timeliness: '95',
+        communication: '90',
+        linkedin: 'https://linkedin.com'
       },
       'UDX-4471-B2C': {
+        cert_id: 'UDX-4471-B2C',
         name: 'Ananya Singh',
-        project: 'AI-Powered Analytics Dashboard',
-        date: 'February 28, 2024',
-        mentor: 'Arjun Mehta · Amazon',
+        track: 'AI / Machine Learning',
+        mentor_name: 'Arjun Mehta · Udinyx',
         duration: '6 Weeks · Full Remote',
-        skills: ['Python', 'FastAPI', 'TensorFlow', 'React', 'AWS'],
-        perf: { quality: 94, time: 91, comms: 97 }
+        completion_date: 'February 28, 2024',
+        batch: 'Batch-1',
+        college: 'NIT Trichy',
+        skills: 'Python,FastAPI,TensorFlow,React,AWS',
+        code_quality: '94',
+        timeliness: '91',
+        communication: '97',
+        linkedin: 'https://linkedin.com'
       }
     };
 
-    const verifyBtn = document.getElementById('verifyBtn');
-    const certInput = document.getElementById('certInput');
-    const resultCard = document.getElementById('resultCard');
-    const errorCard = document.getElementById('errorCard');
-    const resultWrap = document.getElementById('resultWrap');
-    const searchBox = document.getElementById('searchBox');
+    const DEMO_PROJECTS = {
+      'UDX-9982-A7F': [
+        {
+          project_name: 'Full-Stack E-Commerce Platform',
+          description: 'Built a complete e-commerce system with cart, payments, and admin panel.',
+          tech_stack: 'React.js,Node.js,PostgreSQL,Stripe',
+          github_repo: 'https://github.com',
+          live_url: 'https://example.com',
+          status: 'completed'
+        },
+        {
+          project_name: 'Real-Time Chat System',
+          description: 'Scalable WebSocket-based chat with rooms and message persistence.',
+          tech_stack: 'Node.js,Socket.io,Redis,Docker',
+          github_repo: 'https://github.com',
+          live_url: '',
+          status: 'completed'
+        }
+      ],
+      'UDX-4471-B2C': [
+        {
+          project_name: 'AI Analytics Dashboard',
+          description: 'ML-powered dashboard predicting user behaviour from CSV data uploads.',
+          tech_stack: 'Python,FastAPI,TensorFlow,React',
+          github_repo: 'https://github.com',
+          live_url: 'https://example.com',
+          status: 'completed'
+        }
+      ]
+    };
+
+    // ══════════════════════════════════════════════════════════
+    // CSV PARSER
+    // ══════════════════════════════════════════════════════════
+    function parseCSV(text) {
+      const lines = text.trim().split('\n');
+      if (lines.length < 2) return [];
+      const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase());
+      const rows = [];
+      for (let i = 1; i < lines.length; i++) {
+        const vals = [];
+        let cur = '';
+        let inQ = false;
+        for (const ch of lines[i]) {
+          if (ch === '"') { inQ = !inQ; continue; }
+          if (ch === ',' && !inQ) { vals.push(cur.trim()); cur = ''; continue; }
+          cur += ch;
+        }
+        vals.push(cur.trim());
+        const obj = {};
+        headers.forEach((h, idx) => { obj[h] = (vals[idx] || '').trim(); });
+        rows.push(obj);
+      }
+      return rows;
+    }
+
+    // ══════════════════════════════════════════════════════════
+    // DATA FETCHERS
+    // ══════════════════════════════════════════════════════════
+    let certCache = null;
+    let projCache = null;
+    let usedDemo = false;
+
+    async function fetchCerts() {
+      if (certCache) return certCache;
+      try {
+        const res = await fetch(CERT_SHEET_URL + '&t=' + Date.now());
+        if (!res.ok) throw new Error('fetch failed');
+        const text = await res.text();
+        const rows = parseCSV(text);
+        certCache = {};
+        rows.forEach(r => { if (r.cert_id) certCache[r.cert_id.toUpperCase()] = r; });
+        return certCache;
+      } catch (e) {
+        console.warn('Sheet fetch failed, using demo data:', e);
+        usedDemo = true;
+        document.getElementById('corsNotice').style.display = 'block';
+        return DEMO_CERTS;
+      }
+    }
+
+    async function fetchProjects() {
+      if (projCache) return projCache;
+      if (usedDemo) return DEMO_PROJECTS;
+      try {
+        const res =  await fetch(PROJ_SHEET_URL + '&t=' + Date.now());
+        if (!res.ok) throw new Error('fetch failed');
+        const text = await res.text();
+        const rows = parseCSV(text);
+        projCache = {};
+        rows.forEach(r => {
+          const id = (r.intern_id || '').toUpperCase();
+          if (!id) return;
+          if (!projCache[id]) projCache[id] = [];
+          projCache[id].push(r);
+        });
+        return projCache;
+      } catch (e) {
+        console.warn('Projects fetch failed:', e);
+        return DEMO_PROJECTS;
+      }
+    }
+
+    // ══════════════════════════════════════════════════════════
+    // UI HELPERS
+    // ══════════════════════════════════════════════════════════
+    function setLoadingState(loading) {
+      const btn = document.getElementById('verifyBtn');
+      const btnText = document.getElementById('verifyBtnText');
+      const btnIcon = document.getElementById('verifyBtnIcon');
+      const box = document.getElementById('searchBox');
+      btn.disabled = loading;
+      if (loading) {
+        btnText.textContent = 'Verifying...';
+        btnIcon.textContent = 'sync';
+        btnIcon.classList.add('spin');
+        box.classList.add('loading');
+      } else {
+        btnText.textContent = 'Verify';
+        btnIcon.textContent = 'arrow_forward';
+        btnIcon.classList.remove('spin');
+        box.classList.remove('loading');
+      }
+    }
+
+    function animateBars(quality, time, comms) {
+      const items = [
+        { fill: 'perfQuality', val: 'perfQualityVal', pct: quality },
+        { fill: 'perfTime',    val: 'perfTimeVal',    pct: time    },
+        { fill: 'perfComms',   val: 'perfCommsVal',   pct: comms   }
+      ];
+      items.forEach(({ fill, val, pct }, i) => {
+        const el = document.getElementById(fill);
+        const valEl = document.getElementById(val);
+        el.style.width = '0%';
+        setTimeout(() => {
+          el.style.width = pct + '%';
+          valEl.textContent = pct + '%';
+        }, 200 + i * 130);
+      });
+    }
+
+    function renderProjects(projects) {
+      const wrap = document.getElementById('projectCards');
+      const section = document.getElementById('projectsSection');
+      if (!projects || projects.length === 0) {
+        section.style.display = 'none';
+        return;
+      }
+      section.style.display = 'block';
+      wrap.innerHTML = projects.map(p => {
+        const techs = (p.tech_stack || '').split(',').map(t => t.trim()).filter(Boolean);
+        const techChips = techs.map(t => `<span class="tech-chip">${t}</span>`).join('');
+        const statusClass = p.status === 'completed' ? 'status-completed' : 'status-ongoing';
+        const statusText = p.status === 'completed' ? 'Completed' : 'Ongoing';
+        const githubLink = p.github_repo
+          ? `<a class="project-link" href="${p.github_repo}" target="_blank" rel="noopener">
+               <span class="material-symbols-outlined">code</span> GitHub
+             </a>` : '';
+        const liveLink = p.live_url
+          ? `<a class="project-link" href="${p.live_url}" target="_blank" rel="noopener">
+               <span class="material-symbols-outlined">open_in_new</span> Live Demo
+             </a>` : '';
+        return `
+          <div class="project-card">
+            <div class="project-card-header">
+              <span class="project-card-name">${p.project_name || 'Untitled Project'}</span>
+              <span class="project-status-badge ${statusClass}">${statusText}</span>
+            </div>
+            ${p.description ? `<p class="project-card-desc">${p.description}</p>` : ''}
+            ${techs.length ? `<div class="project-tech-chips">${techChips}</div>` : ''}
+            ${(githubLink || liveLink) ? `<div class="project-links">${githubLink}${liveLink}</div>` : ''}
+          </div>`;
+      }).join('');
+    }
+
+    function showSuccess(cert, projects, certId) {
+      const skills = (cert.skills || '').split(',').map(s => s.trim()).filter(Boolean);
+      document.getElementById('resultName').textContent = cert.name || '—';
+      document.getElementById('resultCertId').textContent = certId;
+      document.getElementById('resultTrack').textContent = cert.track || '—';
+      document.getElementById('resultDate').textContent = cert.completion_date || '—';
+      document.getElementById('resultMentor').textContent = cert.mentor_name || '—';
+      document.getElementById('resultDuration').textContent = cert.duration || '—';
+      document.getElementById('resultBatch').textContent = cert.batch || '—';
+      document.getElementById('resultCollege').textContent = cert.college || '—';
+
+      document.getElementById('resultSkills').innerHTML = skills.length
+        ? skills.map(s => `<span class="skill-chip skill-chip--verified">${s}</span>`).join('')
+        : '<span style="color:#666;font-size:13px">No skills recorded</span>';
+
+      animateBars(
+        parseInt(cert.code_quality) || 0,
+        parseInt(cert.timeliness) || 0,
+        parseInt(cert.communication) || 0
+      );
+
+      const linkedinBtn = document.getElementById('linkedinBtn');
+      if (cert.linkedin) {
+        linkedinBtn.onclick = () => window.open(cert.linkedin, '_blank');
+        linkedinBtn.style.display = '';
+      } else {
+        linkedinBtn.style.display = 'none';
+      }
+
+      renderProjects(projects);
+
+      document.getElementById('resultCard').classList.remove('hidden');
+      document.getElementById('errorCard').classList.add('hidden');
+      document.getElementById('resultWrap').classList.add('visible');
+      document.getElementById('resultCard').classList.add('result-pop');
+      setTimeout(() => document.getElementById('resultCard').classList.remove('result-pop'), 500);
+    }
+
+    function showError(certId) {
+      document.getElementById('errorId').textContent = certId;
+      document.getElementById('errorCard').classList.remove('hidden');
+      document.getElementById('resultCard').classList.add('hidden');
+      document.getElementById('resultWrap').classList.add('visible');
+    }
+
+    // ══════════════════════════════════════════════════════════
+    // MAIN VERIFY FUNCTION
+    // ══════════════════════════════════════════════════════════
+    async function doVerify() {
+      const input = document.getElementById('certInput');
+      const certId = input.value.trim().toUpperCase();
+      if (!certId) { input.focus(); return; }
+
+      setLoadingState(true);
+      document.getElementById('resultWrap').classList.remove('visible');
+
+      try {
+        const [certs, projects] = await Promise.all([fetchCerts(), fetchProjects()]);
+        setLoadingState(false);
+
+        const cert = certs[certId];
+        if (cert) {
+          const internProjects = projects[certId] || [];
+          showSuccess(cert, internProjects, certId);
+        } else {
+          showError(certId);
+        }
+      } catch (err) {
+        setLoadingState(false);
+        showError(certId);
+        console.error(err);
+      }
+
+      document.getElementById('resultWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ══════════════════════════════════════════════════════════
+    // EVENT LISTENERS & UTILITIES
+    // ══════════════════════════════════════════════════════════
+    document.getElementById('verifyBtn').addEventListener('click', doVerify);
+    document.getElementById('certInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') doVerify();
+    });
 
     function useSampleId(id) {
-      certInput.value = id;
-      certInput.focus();
+      document.getElementById('certInput').value = id;
+      document.getElementById('certInput').focus();
     }
     window.useSampleId = useSampleId;
 
     function resetForm() {
-      errorCard.classList.add('hidden');
-      resultCard.classList.remove('hidden');
+      document.getElementById('certInput').value = '';
+      document.getElementById('resultWrap').classList.remove('visible');
+      document.getElementById('certInput').focus();
     }
     window.resetForm = resetForm;
 
-    function animatePerf(card, cert) {
-      const fills = card.querySelectorAll('.perf-fill');
-      const vals = [cert.perf.quality, cert.perf.time, cert.perf.comms];
-      fills.forEach((f, i) => {
-        f.style.width = '0%';
-        setTimeout(() => { f.style.width = vals[i] + '%'; }, 100 + i * 100);
-      });
-    }
-
-    function doVerify() {
-      const id = certInput.value.trim().toUpperCase();
-      if (!id) return;
-
-      // Loading state
-      verifyBtn.disabled = true;
-      document.getElementById('verifyBtnText').textContent = 'Verifying...';
-      document.getElementById('verifyBtnIcon').textContent = 'sync';
-      document.getElementById('verifyBtnIcon').classList.add('spin');
-      searchBox.classList.add('loading');
-
-      // Hide results
-      resultWrap.style.opacity = '0.3';
-
-      setTimeout(() => {
-        verifyBtn.disabled = false;
-        document.getElementById('verifyBtnText').textContent = 'Verify';
-        document.getElementById('verifyBtnIcon').textContent = 'arrow_forward';
-        document.getElementById('verifyBtnIcon').classList.remove('spin');
-        searchBox.classList.remove('loading');
-        resultWrap.style.opacity = '1';
-
-        const cert = CERTS[id];
-        if (cert) {
-          // Show success
-          document.getElementById('resultName').textContent = cert.name;
-          document.getElementById('resultCertId').textContent = id;
-          document.getElementById('resultProject').textContent = cert.project;
-          document.getElementById('resultDate').textContent = cert.date;
-          document.getElementById('resultMentor').textContent = cert.mentor;
-          document.getElementById('resultDuration').textContent = cert.duration;
-
-          const skillsEl = document.getElementById('resultSkills');
-          skillsEl.innerHTML = cert.skills.map(s => `<span class="skill-chip skill-chip--verified">${s}</span>`).join('');
-
-          const fills = document.querySelectorAll('.perf-fill');
-          const vals = [cert.perf.quality, cert.perf.time, cert.perf.comms];
-          fills.forEach((f, i) => {
-            f.style.width = '0%';
-            setTimeout(() => { f.style.width = vals[i] + '%'; }, 200 + i * 120);
-          });
-
-          resultCard.classList.remove('hidden');
-          errorCard.classList.add('hidden');
-          resultCard.classList.add('result-pop');
-          setTimeout(() => resultCard.classList.remove('result-pop'), 500);
-        } else {
-          document.getElementById('errorId').textContent = id;
-          errorCard.classList.remove('hidden');
-          resultCard.classList.add('hidden');
-        }
-
-        // scroll into view
-        resultWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 900);
-    }
-
-    verifyBtn.addEventListener('click', doVerify);
-    certInput.addEventListener('keydown', e => { if (e.key === 'Enter') doVerify(); });
-
-    // Initial perf bar animation
+    // URL param support — verify.html?id=UDX-001-A7F
     window.addEventListener('load', () => {
-      const fills = document.querySelectorAll('.perf-fill');
-      fills.forEach((f, i) => {
-        f.style.width = '0%';
-        const target = f.style.width;
-        const w = ['88%','95%','90%'][i];
-        setTimeout(() => { f.style.width = w; }, 400 + i * 150);
-      });
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      if (id) {
+        document.getElementById('certInput').value = id;
+        doVerify();
+      }
     });
   </script>
   <script src="main.js"></script>
