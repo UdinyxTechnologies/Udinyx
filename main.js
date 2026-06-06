@@ -116,19 +116,26 @@ document.addEventListener('DOMContentLoaded', () => {
   if (perfSection) {
     const fills = perfSection.querySelectorAll('.perf-fill');
     const targets = [];
+    let hasInitialValue = false;
+
     fills.forEach(f => {
-      targets.push(f.style.width);
+      const width = f.style.width || '0%';
+      targets.push(width);
+      if (width !== '0%' && width !== '') hasInitialValue = true;
       f.style.width = '0%';
     });
-    const perfObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        fills.forEach((f, i) => {
-          setTimeout(() => { f.style.width = targets[i]; }, 150 * i);
-        });
-        perfObserver.disconnect();
-      }
-    }, { threshold: 0.4 });
-    perfObserver.observe(perfSection);
+
+    if (hasInitialValue) {
+      const perfObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          fills.forEach((f, i) => {
+            setTimeout(() => { f.style.width = targets[i]; }, 150 * i);
+          });
+          perfObserver.disconnect();
+        }
+      }, { threshold: 0.4 });
+      perfObserver.observe(perfSection);
+    }
   }
 
   /* ---- 7. SMOOTH INTERNAL LINK SCROLL ---- */
